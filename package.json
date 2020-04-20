@@ -1,0 +1,12 @@
+{
+  "name": "fairygui2dice",
+  "version": "1.0.0",
+  "description": "将 fairyGUI 中的界面转换为框架的代码",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "hwc",
+  "license": "ISC"
+}
