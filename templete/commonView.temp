@@ -1,0 +1,16 @@
+class %classname% extends CommonView{
+
+	public constructor(){
+		super();
+	}
+    
+	public initView():void{
+// fairyGUI code start to init view
+// fairyGUI init view end
+    }
+
+	public dispose():void{
+     
+		super.dispose();
+	}
+}

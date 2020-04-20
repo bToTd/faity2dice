@@ -1,0 +1,7 @@
+{
+    "image": "let ${1} = BaseBitmap.create(${2});",
+    "button": "let ${1} = ComponentMgr.getButton(${2}, \"\", ${3|this,()=>{}|}, this);",
+    "list": "let ${1} = ComponentMgr.getScrollList(${2},${3},new egret.Rectangle(${4}));",
+    "text": "let ${1} = ComponentMgr.getTextField('11', ${2|TextFieldConst|}, ${3|ColorEnums|});",
+    "ProgressBar": "let ${1} = ComponentMgr.getProgressBar(${2|ProgressBarConst|}, ${3|ProgressBarConst|}, ${4|ProgressBarConst|});"
+}

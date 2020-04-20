@@ -1,0 +1,32 @@
+class %classname% extends ScrollListItem{
+
+    constructor(){
+        super()
+    }
+    protected initItem(index:number,data:any,itemParam?:any):void
+	{   
+// fairyGUI code start to init view
+// fairyGUI init view end
+    }
+
+	/**
+	 * 不同格子X间距
+	 */
+	public getSpaceX():number
+	{
+		return 0;
+	}
+	/**
+	 * 不同格子Y间距
+	 */
+	public getSpaceY():number
+	{
+		return 0s;
+	}
+
+	public dispose():void
+	{
+      
+		super.dispose();
+	}
+}
