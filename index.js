@@ -72,7 +72,14 @@ let toTFCode = function (obj, parent) {
 }
 
 let toListCode = function (obj, parent) {
-
+    // 需要一个 listitem 类，直接使用 obj.name + "Item" 作为 list item
+    // 类，然后判断当前文件夹下是否出存在这个类的 ts 文件，没有则直接生成。
+    let valueName = obj.name;
+    let pos = obj.xy.split(",");
+    let size =  obj.size.split(","); // 移动存在
+    let code = `
+    
+    `
     return "";
 }
 
@@ -86,8 +93,11 @@ let toProgressCode = function (obj, parent) {
 
 let toComponent = function (path, parent) {
     let cmp = pkgParser.comParse(path);
-    let code = "";
     let conName = path.split("/").pop().split(".")[0];
+    let code = `
+    let ${conName} = new BaseDisplayObjectContainer();
+    ${conName}.setPosition();
+    `
     
 }
 
