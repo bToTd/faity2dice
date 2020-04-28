@@ -12,7 +12,7 @@ const pkgParser = require("./src/fairyGUIparse/parsePkg");
 // fs.writeFileSync("./test/package.json", JSON.stringify(res, null, 2));
 
 
-let toImagesCode = function(obj, parent){
+let toImagesCode = function (obj, parent) {
     let valueName = obj.name;
     let resName = obj.fileName.split("/").pop().split(".")[0];
     let pos = obj.xy.split(",");
@@ -35,7 +35,7 @@ let toImagesCode = function(obj, parent){
     return code;
 }
 
-let toTFCode = function(obj, parent){
+let toTFCode = function (obj, parent) {
     let valueName = obj.name;
     let fontSize = 24;
     let fontColor = obj.color.replace("#", "0x");
@@ -58,8 +58,7 @@ let toTFCode = function(obj, parent){
 
     if(obj.strokeColor){
         code = code +
-        `${valueName}.stroke = true;
-    ${valueName}.strokeColor = ${obj.strokeColor.replace("#", "0x")};
+        `${valueName}.strokeColor = ${obj.strokeColor.replace("#", "0x")};
     `
     }
 
@@ -70,6 +69,19 @@ let toTFCode = function(obj, parent){
     }
 
     return code;
+}
+
+let toListCode = function (obj, parent) {
+
+    return "";
+}
+
+let toBtnCode = function (obj, patrent) {
+    return "";
+}
+
+let toProgressCode = function (obj, patrent) {
+    return "";
 }
 
 let main = function () {

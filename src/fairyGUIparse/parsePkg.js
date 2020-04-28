@@ -77,10 +77,6 @@ const parsePkg = (function(){
         return com;
     }
 
-    let isXmlData = function(str){
-        
-    }
-
     return {
         parsePkg: parsePkg,
         resMap: ResMap,
