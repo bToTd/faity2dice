@@ -76,12 +76,19 @@ let toListCode = function (obj, parent) {
     return "";
 }
 
-let toBtnCode = function (obj, patrent) {
+let toBtnCode = function (obj, parent) {
     return "";
 }
 
-let toProgressCode = function (obj, patrent) {
+let toProgressCode = function (obj, parent) {
     return "";
+}
+
+let toComponent = function (path, parent) {
+    let cmp = pkgParser.comParse(path);
+    let code = "";
+    let conName = path.split("/").pop().split(".")[0];
+    
 }
 
 let main = function () {
@@ -94,6 +101,8 @@ let main = function () {
             // 还没处理
         } else if (element.text) {
             code += toTFCode(element.text, "this");
+        } else if (element.list) {
+            code += toListCode(element.list, "this");
         }
     });
 
