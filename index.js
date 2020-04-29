@@ -77,13 +77,30 @@ let toListCode = function (obj, parent) {
     let valueName = obj.name;
     let pos = obj.xy.split(",");
     let size =  obj.size.split(","); // 移动存在
+    let itemClassName = valueName.toUps
     let code = `
-    
-    `
-    return "";
+    let ${valueName} = ComponentMgr.getScrollList(${valueName}, [], new egret.Rectangle(0,0,${size[0]}, ${size[1]}));
+    ${parent}.addChild(${valueName});
+    ${valueName}.setPosition(${pos[0]}, ${pos[1]});
+    `;
+
+    if(false){
+        // 这里要生成 listItem 类
+    }
+    return code;
+}
+
+let strFirstChatUpper = function (str) {
+    let firstChat = str[0];
+    return "".concat(firstChat.toUpperCase(), str.substr(1, str.lenght - 1));
 }
 
 let toBtnCode = function (obj, parent) {
+    // btn 的代码
+    // let userInfoBtn = ComponentMgr.getButton("name_bg", "", this.infoOnclickHandler, this);
+	// 	nameView.addChild(userInfoBtn);
+	// 	userInfoBtn.x = 0;
+	// 	userInfoBtn.y = 0;
     return "";
 }
 
