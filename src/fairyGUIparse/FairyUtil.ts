@@ -6,12 +6,12 @@
  */
 import fs = require("fs");
 import xml2json = require("xml2json");
-namespace FairyUtil {
+export default class FairyUtil {
     /**
      * 解析 FairyGUI package.xml 的数据
      * @param fileName FairyGUI 包名
      */
-    export function parsePkg (fileName:string):any {
+    public static parsePkg (fileName:string):any {
         let context = fs.readFileSync(fileName, {encoding:"utf8"});
         let pkg = xml2json.toJson(context, {object: true});
         return pkg;
@@ -20,8 +20,8 @@ namespace FairyUtil {
      * 把 FairyGUI package.xml 的数据生成 obj;
      * @param fileName FairyGUI 包名
      */
-    export function resMap (fileName:string) {
-        let pkg:any = parsePkg(fileName)["packageDescription"]["resources"];
+    public static resMap (fileName:string) {
+        let pkg:any = this.parsePkg(fileName)["packageDescription"]["resources"];
         let res:any = {};
         for (const key in pkg) {
             if (pkg.hasOwnProperty(key)) {
@@ -43,7 +43,7 @@ namespace FairyUtil {
      * 解析 FairyGUI 组件文件的数据信息
      * @param fileName 组件的文件名
      */
-    export function cmpParse (fileName:string) {
+    public static cmpParse (fileName:string) {
         let cmp = fs.readFileSync(fileName, {encoding:"utf8"});
         let com:any = xml2json.toJson(cmp, {object:true});
         let tem = cmp.match(/<displayList>[\S\s]+<\/displayList>/g)[0];
@@ -92,7 +92,7 @@ namespace FairyUtil {
      * @param path 生成的代码文件路径
      * @param code 代码内容
      */
-    export function saveCode(path:string, code:string){
+    public static saveCode(path:string, code:string){
         fs.writeFileSync(path,code);
     }
 }
