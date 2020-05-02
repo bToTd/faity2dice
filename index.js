@@ -77,7 +77,6 @@ let toListCode = function (obj, parent) {
     let valueName = obj.name;
     let pos = obj.xy.split(",");
     let size =  obj.size.split(","); // 移动存在
-    let itemClassName = valueName.toUps
     let code = `
     let ${valueName} = ComponentMgr.getScrollList(${valueName}, [], new egret.Rectangle(0,0,${size[0]}, ${size[1]}));
     ${parent}.addChild(${valueName});
