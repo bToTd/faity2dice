@@ -1,6 +1,7 @@
-import BaseUI, { UIdata, TFUIdata } from "./BaseUI";
+import BaseUI, { UIdata, TFUIdata, ComUI } from "./BaseUI";
 import ImageUI from "./ImageUI";
 import TFUI from "./TFUI";
+import FairyUtil from "../fairyGUIparse/FairyUtil";
 
 /*
  *@description: 组件生成模板
@@ -15,12 +16,39 @@ export default class BaseCom extends BaseUI{
     public type:string = null; // 组件类型
     public displayList:Array<any> = null;
     
-    constructor(data:UIdata, parent:string){
+    constructor(data:ComUI, parent:string){
         super(data, parent);
+        this.fileName = data.fileName;
+        this.resURL = data.src;
+        this.getDisplayList();
     }
 
     private getDisplayList(){
+        let cpm:any = FairyUtil.cmpParse(this.fileName);
+        this.displayList = cpm.component.displayList;
+        this.type = cpm.extends;
+    }
+
+    private getComCode(){
+        switch (this.type) {
+            case "botton":
+                return this.btnCode();
+            
+            case "progress":
+                return this.proCode();
         
+            default:
+                break;
+        }
+    }
+    private btnCode():string{
+        let tem:string = "";
+
+        return tem;
+    }
+
+    private proCode():string{
+        return ""
     }
 
     public toCode(){
@@ -28,7 +56,7 @@ export default class BaseCom extends BaseUI{
             if (element.image) {
                new ImageUI(<UIdata>element.image, this.name);
             } else if (element.component) {
-                new BaseCom(<UIdata>element.component, this.name);
+                new BaseCom(<ComUI>element.component, this.name);
             } else if (element.text) {
                 new TFUI(<TFUIdata>element.text, this.name);
             } else if (element.list) {

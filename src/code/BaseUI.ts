@@ -22,6 +22,12 @@ export interface TFUIdata extends UIdata {
     vAlign?:string;
 }
 
+export interface ComUI extends UIdata {
+    fileName:string;
+    src:string;
+
+}
+
 export interface CodeStr{
     UIcode:string;
     ValueCode:string;
