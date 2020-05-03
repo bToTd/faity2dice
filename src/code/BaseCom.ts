@@ -1,4 +1,4 @@
-import BaseUI, { UIdata, TFUIdata, ComUI } from "./BaseUI";
+import BaseUI, { UIdata, TFUIdata, ComUI, CodeStr } from "./BaseUI";
 import ImageUI from "./ImageUI";
 import TFUI from "./TFUI";
 import FairyUtil from "../fairyGUIparse/FairyUtil";
@@ -38,20 +38,38 @@ export default class BaseCom extends BaseUI{
                 return this.proCode();
         
             default:
-                break;
+                return this.comCode();
         }
     }
-    private btnCode():string{
-        let tem:string = "";
+    private btnCode():CodeStr{
+        let code:CodeStr = null;
+        code.ValueCode = "";
+        code.DisposeCode = "";
 
-        return tem;
+
+        return code;
+    }
+
+    private comCode():CodeStr{
+        let code:CodeStr = null;
+        code.ValueCode = `\tpublic ${this.name}:BaseDisplayObjectContainer = null;\n`;
+        code.DisposeCode = `\t\tthis.${this.name} = null;\n`;
+
+        code.UIcode = `
+        let ${this.name} = new BaseDisplayObjectContainer();
+        ${this.parent}.addChild(${this.name});
+        this.${this.name} = ${this.name};
+        ${this.name}.setPositon(${this.x}, ${this.y});
+        `
+
+        return code;
     }
 
     private proCode():string{
         return ""
     }
 
-    public toCode(){
+    public toCode():CodeStr{
         this.displayList.forEach(element => {
             if (element.image) {
                new ImageUI(<UIdata>element.image, this.name);
