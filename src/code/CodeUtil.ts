@@ -133,6 +133,12 @@ export class CodeUtil {
         return code;
     }
 
+    /**
+     * 生成框架中的容器代码
+     * @param url 文件的路径 url
+     * @param parent 添加到那个父节点
+     * @param obj 数据
+     */
     public static toComUI(url:string, parent:string, obj?:any):CodeStr{
         if(!url){
             return
@@ -177,6 +183,12 @@ export class CodeUtil {
         return code;
     }
 
+    /**
+     * 生成框架中的按钮代码
+     * @param obj 
+     * @param parent 
+     * @param displayList 
+     */
     public static toBtnUI(obj:any, parent:string, displayList:any):CodeStr{
         let code:CodeStr = {
             ValueCode: "",
@@ -207,6 +219,11 @@ export class CodeUtil {
         return code;
     }
 
+    /**
+     * 生成的框架中的最基本的容器
+     * @param obj 
+     * @param parent 
+     */
     public static comCode(obj:any, parent:string):CodeStr{
         let code:CodeStr = {
             ValueCode: "",
