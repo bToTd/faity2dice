@@ -67,4 +67,15 @@ export default class BaseUI {
             DisposeCode:null
         }
     }
+
+    public static addCode(code1:CodeStr, code2:CodeStr):CodeStr{
+        if(!code1 || !code2){
+            return;
+        }
+        let code:CodeStr;
+        code.UIcode = code1.UIcode + code2.UIcode;
+        code.DisposeCode = code1.DisposeCode + code2.DisposeCode;
+        code.ValueCode = code1.ValueCode + code2.ValueCode;
+        return code;
+    }
 }

@@ -95,4 +95,32 @@ export default class FairyUtil {
     public static saveCode(path:string, code:string){
         fs.writeFileSync(path,code);
     }
+
+    public static tsClass(className:string, code:any):string{
+        let name = className;
+        let value = code.ValueCode;
+        let UIcode = code.UIcode;
+        let dis = code.DisposeCode;
+        let cls = `
+/**
+ * 这是通过 FairyGUI 文件生成的 UI 代码。请注意一下几点：
+ * 1. 不要修改这个文件的内容；
+ * 2. 调整 UI 时，尽量在 FairyGUI 上调整，再生成 UI 代码；
+ * 3. 希望能有用。
+ ***/
+class ${name} {
+    private obj:any = null;
+${value}
+    constructor(view:any){
+        this.obj = view;
+${UIcode}
+    }
+
+    public dispose () {
+${dis}
+    }
+}
+        `
+        return cls;
+    }
 }

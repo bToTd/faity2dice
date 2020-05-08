@@ -48,7 +48,7 @@ export default class TFUI extends BaseUI{
         if(this.vAlign){
             tem = tem +
             `${this.name}.verticalAlign = "${this.vAlign}";
-            `
+        `
         }
         code.UIcode = tem;
         return code;

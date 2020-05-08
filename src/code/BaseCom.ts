@@ -29,7 +29,7 @@ export default class BaseCom extends BaseUI{
         this.type = cpm.extends;
     }
 
-    private getComCode(){
+    private getComCode():CodeStr{
         switch (this.type) {
             case "botton":
                 return this.btnCode();
@@ -43,9 +43,25 @@ export default class BaseCom extends BaseUI{
     }
     private btnCode():CodeStr{
         let code:CodeStr = null;
-        code.ValueCode = "";
-        code.DisposeCode = "";
+        code.ValueCode = `\tpublic ${this.name}:BaseButton = null;\n`;
+        code.DisposeCode = `\t\tthis.${this.name} = null;\n`;
 
+        /**
+         * 获取按钮资源，默认第一张图片为按钮资源
+         */
+        let btnimg:any = null;
+        if(this.displayList[0].image){
+            btnimg = this.displayList.shift()["image"];
+            let imgName = btnimg.resName;
+            code.ValueCode = `\tpublic ${this.name}OnClick:Function = null;\n`;
+            code.DisposeCode = `\t\tthis.${this.name}OnClick = null\n`;
+            code.UIcode = `
+        let ${this.name} = ComponentMgr.getButton(${imgName}, "", this.${this.name}OnClick, this.obj);
+        ${this.parent}.addChild(${this.name});
+        this.${this.name} = ${this.name};
+        ${this.name}.setPositon(${this.x}, ${this.y});
+        `
+        }
 
         return code;
     }
@@ -65,22 +81,26 @@ export default class BaseCom extends BaseUI{
         return code;
     }
 
-    private proCode():string{
-        return ""
+    private proCode():CodeStr{
+        return null
     }
 
     public toCode():CodeStr{
+        let code:CodeStr = this.getComCode();
         this.displayList.forEach(element => {
             if (element.image) {
-               new ImageUI(<UIdata>element.image, this.name);
+                let tem = new ImageUI(<UIdata>element.image, this.name);
+                code = BaseUI.addCode(code, tem.toCode()); 
             } else if (element.component) {
-                new BaseCom(<ComUI>element.component, this.name);
+                let tem = new BaseCom(<ComUI>element.component, this.name);
+                code = BaseUI.addCode(code, tem.toCode());
             } else if (element.text) {
-                new TFUI(<TFUIdata>element.text, this.name);
+                let tem = new TFUI(<TFUIdata>element.text, this.name);
+                code = BaseUI.addCode(code, tem.toCode());
             } else if (element.list) {
                 
             }
         });
-        return super.toCode();
+        return code;
     }
 }
